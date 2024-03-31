@@ -7,13 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-class FavoritesRecipesFragment : Fragment() {
+class FavoritesFragment : Fragment() {
 
     companion object {
-        fun newInstance() = FavoritesRecipesFragment()
+        fun newInstance() = FavoritesFragment()
     }
 
-    private val viewModel: FavoritesRecipesViewModel by viewModels()
+    private val viewModel: FavoritesViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +25,6 @@ class FavoritesRecipesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_favorites_recipes, container, false)
+        return inflater.inflate(R.layout.fragment_favorites, container, false)
     }
 }

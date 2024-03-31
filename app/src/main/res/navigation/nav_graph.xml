@@ -12,12 +12,12 @@
         tools:layout="@layout/fragment_recipes" />
     <fragment
         android:id="@+id/favoritesRecipesFragment"
-        android:name="com.sina.efood.FavoritesRecipesFragment"
+        android:name="com.sina.efood.FavoritesFragment"
         android:label="Favorites"
-        tools:layout="@layout/fragment_favorites_recipes" />
+        tools:layout="@layout/fragment_favorites" />
     <fragment
         android:id="@+id/foodJokesFragment"
-        android:name="com.sina.efood.FoodJokesFragment"
+        android:name="com.sina.efood.JokesFragment"
         android:label="Jgiokes"
-        tools:layout="@layout/fragment_food_jokes" />
+        tools:layout="@layout/fragment_jokes" />
 </navigation>

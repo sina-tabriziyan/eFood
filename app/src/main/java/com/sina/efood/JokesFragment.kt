@@ -7,13 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-class FoodJokesFragment : Fragment() {
+class JokesFragment : Fragment() {
 
     companion object {
-        fun newInstance() = FoodJokesFragment()
+        fun newInstance() = JokesFragment()
     }
 
-    private val viewModel: FoodJokesViewModel by viewModels()
+    private val viewModel: JokesViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +25,6 @@ class FoodJokesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_food_jokes, container, false)
+        return inflater.inflate(R.layout.fragment_jokes, container, false)
     }
 }
