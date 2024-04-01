@@ -1,7 +1,7 @@
-package com.sina.efood
+package com.sina.efood.fragments
 
 import androidx.lifecycle.ViewModel
 
-class JokesViewModel : ViewModel() {
+class FavoritesViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }

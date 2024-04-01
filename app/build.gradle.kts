@@ -4,6 +4,7 @@ plugins {
 
     alias(libs.plugins.kapt)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.parcelize)
 
 }
 
@@ -77,5 +78,8 @@ dependencies {
 
     implementation(libs.datastore)
     implementation(libs.gson)
+
+
+//    implementation(libs.bundles.shimmer)
 
 }
