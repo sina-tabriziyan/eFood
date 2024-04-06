@@ -32,4 +32,13 @@
     <string name="primal">Primal</string>
     <string name="whole30">Whole30</string>
     <string name="apply">Apply</string>
+
+    <string name="this_is_full">This disk is full</string>
+    <string name="request_timeout">request_timeout</string>
+    <string name="too_many_requests">too_many_requests</string>
+    <string name="not_network">not_network</string>
+    <string name="payload_too_large">payload_too_large</string>
+    <string name="server_error">server_error</string>
+    <string name="serialization_error">serialization_error</string>
+    <string name="unknown_error">unknown_error</string>
 </resources>
