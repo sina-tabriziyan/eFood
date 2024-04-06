@@ -103,9 +103,10 @@ kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt"}
 
 [bundles]
-hilt-deps = ["hilt-core", "hilt-integrations-work", "hilt-lifecycle-viewmodel"]
+hilt-deps = ["hilt-core", "hilt-integrations-work", ]
 hilt-compilers = ["hilt-compiler", "hilt-integrations-compiler"]
 
 room-deps = ["room-runtime", "room-ktx"]
