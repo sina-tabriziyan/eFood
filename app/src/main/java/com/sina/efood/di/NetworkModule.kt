@@ -2,9 +2,12 @@ package com.sina.efood.di
 
 import android.app.Application
 import coil.ImageLoader
+import com.sina.efood.data.Repository
+import com.sina.efood.data.local.LocalDataSource
 import com.sina.efood.di.qualifier.ApiKey
 import com.sina.efood.di.qualifier.BaseUrl
 import com.sina.efood.data.remote.FoodService
+import com.sina.efood.data.remote.RemoteDataSource
 import com.sina.efood.utils.API_KEY
 import com.sina.efood.utils.API_KEY_VALUE
 import com.sina.efood.utils.BASE_URL
@@ -12,6 +15,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,6 +23,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
@@ -33,6 +38,7 @@ object NetworkModule {
     @Singleton
     @ApiKey
     fun provideApiKey(): String = API_KEY
+
     @Provides
     @Singleton
     @BaseUrl
@@ -94,7 +100,22 @@ object NetworkModule {
     @Provides
     fun provideService(retrofit: Retrofit): FoodService = provideApi<FoodService>(retrofit)
 
+
+    @Provides
+    fun provideRemoteDataSource(foodService: FoodService): RemoteDataSource =
+        RemoteDataSource(foodService)
+
+
+    @Provides
+    fun provideRepository(
+        remoteDataSource: RemoteDataSource, localDataSource: LocalDataSource,
+        @IODispatcher ioDispatcher: CoroutineDispatcher
+    ): Repository =
+        Repository(remoteDataSource, localDataSource, ioDispatcher)
+
+
 }
-inline fun <reified T>provideApi(retrofit: Retrofit): T {
+
+inline fun <reified T> provideApi(retrofit: Retrofit): T {
     return retrofit.create(T::class.java)
 }
