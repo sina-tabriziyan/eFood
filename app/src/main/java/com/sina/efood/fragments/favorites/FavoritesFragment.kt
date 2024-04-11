@@ -1,4 +1,4 @@
-package com.sina.efood.fragments
+package com.sina.efood.fragments.favorites
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle

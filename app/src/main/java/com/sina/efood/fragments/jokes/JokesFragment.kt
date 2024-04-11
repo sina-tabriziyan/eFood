@@ -1,4 +1,4 @@
-package com.sina.efood.fragments
+package com.sina.efood.fragments.jokes
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle

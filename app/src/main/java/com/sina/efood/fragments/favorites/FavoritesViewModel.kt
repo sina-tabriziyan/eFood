@@ -1,10 +1,10 @@
-package com.sina.efood.fragments
+package com.sina.efood.fragments.favorites
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class JokesViewModel @Inject constructor() : ViewModel() {
+class FavoritesViewModel @Inject constructor() : ViewModel() {
     // TODO: Implement the ViewModel
 }
