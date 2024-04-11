@@ -11,7 +11,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.sina.efood.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -54,6 +56,10 @@ class MainActivity : AppCompatActivity() {
     private fun setupNavController() {
         navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHost.navController
+        val inflater = navController.navInflater
+        val graph = inflater.inflate(R.navigation.nav_graph)
+
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
