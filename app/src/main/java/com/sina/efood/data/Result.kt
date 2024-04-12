@@ -1,10 +1,14 @@
 package com.sina.efood.data
 
+import com.sina.efood.core.errors.DataError
+import com.sina.efood.core.errors.Error
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withTimeout
 import retrofit2.Response
+import java.io.IOException
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -58,6 +62,23 @@ fun <D> Response<D>.openResponse(): AppResult<D, DataError.Network> {
             in 400..499 -> AppResult.Error(DataError.Network.REQUEST_TIMEOUT)
             in 500..599 -> AppResult.Error(DataError.Network.NO_INTERNET)
             else -> AppResult.Error(DataError.Network.UNKNOWN)
+        }
+    }
+}
+
+suspend fun <D> Flow<D>.openLocalResponse(): AppResult<D, DataError.Local> {
+    return try {
+        val data = this.first()
+        if (data != null) {
+            AppResult.Success(data)
+        } else {
+            AppResult.Error(DataError.Local.Unknown)
+        }
+    } catch (e: Exception) {
+        when (e) {
+            is IOException -> AppResult.Error(DataError.Local.DiskIO)
+            is OutOfMemoryError -> AppResult.Error(DataError.Local.OutOfMemory)
+            else -> AppResult.Error(DataError.Local.Unknown)
         }
     }
 }
