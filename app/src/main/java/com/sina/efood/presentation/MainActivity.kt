@@ -1,4 +1,4 @@
-package com.sina.efood
+package com.sina.efood.presentation
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -10,6 +10,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.sina.efood.R
 import com.sina.efood.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
