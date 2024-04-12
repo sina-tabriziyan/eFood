@@ -3,6 +3,7 @@ package com.sina.efood.data.di.module
 import com.sina.efood.core.di.annotation.IODispatcher
 import com.sina.efood.core.local.RecipesDao
 import com.sina.efood.core.remote.FoodService
+import com.sina.efood.core.remote.connectivity.NetworkListener
 import com.sina.efood.data.local.LocalDataSource
 import com.sina.efood.data.remote.RemoteDataSource
 import com.sina.efood.data.repository.RecipesRepository
@@ -31,8 +32,9 @@ object DataModule {
     fun provideRepository(
         remoteDataSource: RemoteDataSource,
         localDataSource: LocalDataSource,
-        @IODispatcher ioDispatcher: CoroutineDispatcher
-    ): IRecipesRepository = RecipesRepository(remoteDataSource, localDataSource, ioDispatcher)
+        @IODispatcher ioDispatcher: CoroutineDispatcher,
+        networkListener: NetworkListener
+    ): IRecipesRepository = RecipesRepository(remoteDataSource, localDataSource, ioDispatcher, networkListener)
 
 
 }

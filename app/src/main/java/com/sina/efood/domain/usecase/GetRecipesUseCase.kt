@@ -10,7 +10,5 @@ import javax.inject.Inject
 class GetRecipesUseCase @Inject constructor(
     private val repository: IRecipesRepository,
 ) {
-    suspend operator fun invoke(queries: Map<String, String>): Flow<AppResult<RecipesDto, DataError>> {
-        return repository.getAndStoreRecipes(queries)
-    }
+    suspend operator fun invoke(queries: Map<String, String>): Flow<AppResult<RecipesDto, DataError>> = repository.getAndStoreRecipes(queries)
 }
