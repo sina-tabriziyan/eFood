@@ -6,4 +6,12 @@
     </style>
 
     <style name="Theme.EFood" parent="Base.Theme.EFood" />
+
+
+    <style name="CustomChipStyle" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@color/bg_chip_color</item>
+        <item name="android:textColor">@color/bg_chip_text_color</item>
+        <item name="checkedIconTint">@color/bg_chip_text_color</item>
+    </style>
+
 </resources>

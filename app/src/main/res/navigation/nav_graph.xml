@@ -9,7 +9,11 @@
         android:id="@+id/recipesFragment"
         android:name="com.sina.efood.presentation.fragments.recipes.RecipesFragment"
         android:label="Recipes"
-        tools:layout="@layout/fragment_recipes" />
+        tools:layout="@layout/fragment_recipes" >
+        <action
+            android:id="@+id/action_recipesFragment_to_recipeDialog"
+            app:destination="@id/recipeDialog" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesRecipesFragment"
         android:name="com.sina.efood.presentation.fragments.favorites.FavoritesFragment"
@@ -20,4 +24,8 @@
         android:name="com.sina.efood.presentation.fragments.jokes.JokesFragment"
         android:label="Jgiokes"
         tools:layout="@layout/fragment_jokes" />
+    <dialog
+        android:id="@+id/recipeDialog"
+        android:name="com.sina.efood.presentation.fragments.recipesdialog.RecipeDialog"
+        android:label="RecipeDialog" />
 </navigation>

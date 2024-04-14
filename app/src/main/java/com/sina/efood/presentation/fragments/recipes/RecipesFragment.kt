@@ -6,12 +6,17 @@ import android.view.View
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
+import com.sina.efood.R
 import com.sina.efood.core.base.BaseFragment
 import com.sina.efood.databinding.FragmentRecipesBinding
 import com.sina.efood.presentation.fragments.recipes.adapter.RecipesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 @AndroidEntryPoint
 class RecipesFragment : BaseFragment<FragmentRecipesBinding, RecipesViewModel>(
@@ -44,7 +49,10 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding, RecipesViewModel>(
                 }
             }
         }
+
+        binding.fabRecipesDialog.setOnClickListener {
+            findNavController().navigate(R.id.action_recipesFragment_to_recipeDialog)
+        }
     }
-
-
 }
+
