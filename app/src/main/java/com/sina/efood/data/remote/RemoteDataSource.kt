@@ -13,7 +13,7 @@ class RemoteDataSource @Inject constructor(
     suspend fun getRecipes(queries: Map<String, String>): AppResult<RecipesDto, DataError.Network> =
         foodService.getRecipes(queries).openResponse()
 
-    suspend fun searchRecipes(searchQueries: Map<String, String>) =
+    suspend fun searchRecipes(searchQueries: Map<String, String>): AppResult<RecipesDto, DataError.Network> =
         foodService.searchRecipes(searchQueries).openResponse()
 
 }

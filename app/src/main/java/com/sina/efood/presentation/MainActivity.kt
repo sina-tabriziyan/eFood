@@ -59,8 +59,6 @@ class MainActivity : AppCompatActivity() {
         navController = navHost.navController
         val inflater = navController.navInflater
         val graph = inflater.inflate(R.navigation.nav_graph)
-
-
     }
 
     override fun onSupportNavigateUp(): Boolean {

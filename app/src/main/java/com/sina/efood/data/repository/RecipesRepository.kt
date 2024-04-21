@@ -3,6 +3,7 @@ package com.sina.efood.data.repository
 import com.sina.efood.core.errors.DataError
 import com.sina.efood.data.local.LocalDataSource
 import com.sina.efood.core.local.entities.RecipesEntity
+import com.sina.efood.core.local.prefs.PrefManager
 import com.sina.efood.core.remote.connectivity.NetworkListener
 import com.sina.efood.data.AppResult
 import com.sina.efood.core.remote.dto.RecipesDto
@@ -21,7 +22,7 @@ class RecipesRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val dispatcher: CoroutineDispatcher,
-    private val networkListener: NetworkListener
+    private val networkListener: NetworkListener,
 ) : IRecipesRepository {
 
     override suspend fun getAndStoreRecipes(queries: Map<String, String>): Flow<AppResult<RecipesDto, DataError>> =
