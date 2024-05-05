@@ -1,15 +1,18 @@
 package com.sina.efood.presentation
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sina.efood.R
 import com.sina.efood.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,9 +39,15 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.detailsFragment -> binding.bottomNavigationView.visibility = View.GONE
+                else -> binding.bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
+
     }
 
-    private fun setupBtmNavView() =binding.bottomNavigationView.setupWithNavController(navController)
 
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
@@ -54,8 +63,13 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfig)
     }
 
+    private fun setupBtmNavView() =
+        binding.bottomNavigationView.setupWithNavController(navController)
+
+
     private fun setupNavController() {
-        navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        navHost =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHost.navController
         val inflater = navController.navInflater
         val graph = inflater.inflate(R.navigation.nav_graph)

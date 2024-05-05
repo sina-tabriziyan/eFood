@@ -7,8 +7,8 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.sina.efood.core.local.prefs.PrefManager.PreferencesKey.diet
 import com.sina.efood.core.local.prefs.PrefManager.PreferencesKey.meal
-import com.sina.efood.presentation.fragments.recipesdialog.DietType
-import com.sina.efood.presentation.fragments.recipesdialog.MealType
+import com.sina.efood.presentation.home.recipesdialog.DietType
+import com.sina.efood.presentation.home.recipesdialog.MealType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map

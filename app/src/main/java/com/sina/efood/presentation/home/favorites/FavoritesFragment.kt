@@ -1,4 +1,4 @@
-package com.sina.efood.presentation.fragments.jokes
+package com.sina.efood.presentation.home.favorites
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle
@@ -10,13 +10,13 @@ import com.sina.efood.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class JokesFragment : Fragment() {
+class FavoritesFragment : Fragment() {
 
     companion object {
-        fun newInstance() = JokesFragment()
+        fun newInstance() = FavoritesFragment()
     }
 
-    private val viewModel: JokesViewModel by viewModels()
+    private val viewModel: FavoritesViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +28,6 @@ class JokesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_jokes, container, false)
+        return inflater.inflate(R.layout.fragment_favorites, container, false)
     }
 }

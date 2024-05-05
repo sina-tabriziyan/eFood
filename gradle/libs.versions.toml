@@ -42,6 +42,7 @@ lifecycleLivedataKtx = "2.7.0"
 lifecycleViewmodelKtx = "2.7.0"
 fragmentKtx = "1.6.2"
 
+safeArgs = "2.5.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -103,7 +104,8 @@ kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt"}
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+safeArgs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "safeArgs" }
 
 [bundles]
 hilt-deps = ["hilt-core", "hilt-integrations-work", ]

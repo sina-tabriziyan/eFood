@@ -7,25 +7,42 @@
 
     <fragment
         android:id="@+id/recipesFragment"
-        android:name="com.sina.efood.presentation.fragments.recipes.RecipesFragment"
+        android:name="com.sina.efood.presentation.home.recipes.RecipesFragment"
         android:label="Recipes"
         tools:layout="@layout/fragment_recipes" >
         <action
             android:id="@+id/action_recipesFragment_to_recipeDialog"
             app:destination="@id/recipeDialog" />
+        <action
+            android:id="@+id/action_recipesFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/favoritesRecipesFragment"
-        android:name="com.sina.efood.presentation.fragments.favorites.FavoritesFragment"
+        android:name="com.sina.efood.presentation.home.favorites.FavoritesFragment"
         android:label="Favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesRecipesFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/foodJokesFragment"
-        android:name="com.sina.efood.presentation.fragments.jokes.JokesFragment"
+        android:name="com.sina.efood.presentation.home.jokes.JokesFragment"
         android:label="Jgiokes"
         tools:layout="@layout/fragment_jokes" />
     <dialog
         android:id="@+id/recipeDialog"
-        android:name="com.sina.efood.presentation.fragments.recipesdialog.RecipeDialog"
+        android:name="com.sina.efood.presentation.home.recipesdialog.RecipeDialog"
         android:label="RecipeDialog" />
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.sina.efood.presentation.details.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="recipeId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

@@ -1,4 +1,4 @@
-package com.sina.efood.presentation.fragments.recipes
+package com.sina.efood.presentation.home.recipes
 
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
@@ -45,7 +45,7 @@ class RecipesViewModel @Inject constructor(
     }
 
     init {
-            getRecipes()
+        getRecipes()
     }
 
     fun getRecipes() = viewModelScope.launch {
@@ -68,9 +68,14 @@ class RecipesViewModel @Inject constructor(
         viewModelScope.launch { saveMealUseCase.invoke(mealType) }
     }
 
+    fun onRecipeItemClicked(foodId: Int) {
+        viewModelScope.launch { eventChannel.send(RecipesEvents.NavigateToDetailsFragment(foodId)) }
+    }
+
     sealed interface RecipesEvents {
         data class Error(val error: UiText) : RecipesEvents
         data class RecipesLoaded(val recipes: RecipesDto) : RecipesEvents
+        data class NavigateToDetailsFragment(val foodId:Int) : RecipesEvents
     }
 
 }

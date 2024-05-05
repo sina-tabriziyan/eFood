@@ -1,4 +1,4 @@
-package com.sina.efood.presentation.fragments.recipes
+package com.sina.efood.presentation.home.recipes
 
 import android.os.Bundle
 import android.util.Log
@@ -14,17 +14,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 import com.sina.efood.R
 import com.sina.efood.core.base.BaseFragment
 import com.sina.efood.core.utils.onQueryTextSubmit
 import com.sina.efood.databinding.FragmentRecipesBinding
-import com.sina.efood.presentation.fragments.recipes.adapter.RecipesAdapter
+import com.sina.efood.presentation.home.recipes.adapter.RecipesAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.cache
 import kotlinx.coroutines.launch
-import java.util.Locale
 
 @AndroidEntryPoint
 class RecipesFragment : BaseFragment<FragmentRecipesBinding, RecipesViewModel>(
@@ -37,7 +33,9 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding, RecipesViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = RecipesAdapter()
+        adapter = RecipesAdapter { id ->
+            viewModel.onRecipeItemClicked(id)
+        }
         menuHost = requireActivity()
 
         binding.rvRecipes.adapter = adapter
@@ -49,12 +47,22 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding, RecipesViewModel>(
                 viewModel.events.collect {
                     when (it) {
                         is RecipesViewModel.RecipesEvents.Error -> {
-                            Log.e("TAG", "onViewCreated Error: ${it.error.asString(requireContext())}")
+                            Log.e(
+                                "TAG",
+                                "onViewCreated Error: ${it.error.asString(requireContext())}"
+                            )
                         }
 
                         is RecipesViewModel.RecipesEvents.RecipesLoaded -> {
                             adapter.submitList(it.recipes.results)
                             Log.e("TAG", "onViewCreated: ${it.recipes}")
+                        }
+
+                        is RecipesViewModel.RecipesEvents.NavigateToDetailsFragment -> {
+
+                            findNavController().navigate(
+                                RecipesFragmentDirections.actionRecipesFragmentToDetailsFragment(it.foodId)
+                            )
                         }
                     }
                 }
@@ -69,7 +77,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding, RecipesViewModel>(
                 val searchView = searchAction.actionView as SearchView
                 searchView.isSubmitButtonEnabled = true
                 searchView.onQueryTextSubmit {
-                    Log.e("TAG", "onCreateMenu: $it", )
+                    Log.e("TAG", "onCreateMenu: $it")
                     viewModel.setSearchQuery(it)
 
                 }

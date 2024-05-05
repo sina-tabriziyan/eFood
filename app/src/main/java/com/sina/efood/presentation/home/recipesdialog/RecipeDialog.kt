@@ -1,4 +1,4 @@
-package com.sina.efood.presentation.fragments.recipesdialog
+package com.sina.efood.presentation.home.recipesdialog
 
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +10,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.sina.efood.R
 import com.sina.efood.databinding.RecipesBottomSheetBinding
-import com.sina.efood.presentation.fragments.recipesdialog.MealType.*
+import com.sina.efood.presentation.home.recipesdialog.MealType.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 
