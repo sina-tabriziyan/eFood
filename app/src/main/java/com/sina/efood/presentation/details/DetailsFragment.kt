@@ -2,6 +2,7 @@ package com.sina.efood.presentation.details
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -9,6 +10,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.sina.efood.core.base.BaseFragment
 import com.sina.efood.databinding.FragmentDetailsBinding
+import com.sina.efood.presentation.MainActivity
 
 
 class DetailsFragment : BaseFragment<FragmentDetailsBinding, DetailsViewModel>(
@@ -24,8 +26,9 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding, DetailsViewModel>(
         TabLayoutMediator(binding.tabLayout, binding.detailsViewPager) { tab, position ->
             tab.text = titles[position]
         }.attach()
-    }
 
+
+    }
 }
 
 class DetailsFragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
