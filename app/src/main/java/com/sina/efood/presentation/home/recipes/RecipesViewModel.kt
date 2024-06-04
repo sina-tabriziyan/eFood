@@ -2,8 +2,8 @@ package com.sina.efood.presentation.home.recipes
 
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sina.efood.core.base.BaseViewModel
 import com.sina.efood.core.errors.asUiText
 import com.sina.efood.core.remote.dto.RecipesDto
 import com.sina.efood.core.ui.UiText
@@ -27,7 +27,7 @@ class RecipesViewModel @Inject constructor(
     private val saveDietUseCase: SaveDietUseCase,
     private val saveMealUseCase: SaveMealUseCase,
     private val state: SavedStateHandle
-) : ViewModel() {
+) : BaseViewModel() {
     private val eventChannel = Channel<RecipesEvents>()
     val events = eventChannel.receiveAsFlow()
 
@@ -75,7 +75,7 @@ class RecipesViewModel @Inject constructor(
     sealed interface RecipesEvents {
         data class Error(val error: UiText) : RecipesEvents
         data class RecipesLoaded(val recipes: RecipesDto) : RecipesEvents
-        data class NavigateToDetailsFragment(val foodId:Int) : RecipesEvents
+        data class NavigateToDetailsFragment(val foodId: Int) : RecipesEvents
     }
 
 }
