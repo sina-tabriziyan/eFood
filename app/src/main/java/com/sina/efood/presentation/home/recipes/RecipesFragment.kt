@@ -10,8 +10,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sina.efood.R
@@ -20,7 +18,6 @@ import com.sina.efood.core.utils.onQueryTextSubmit
 import com.sina.efood.databinding.FragmentRecipesBinding
 import com.sina.efood.presentation.home.recipes.adapter.RecipesAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RecipesFragment : BaseFragment<FragmentRecipesBinding, RecipesViewModel>(
@@ -42,32 +39,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding, RecipesViewModel>(
         binding.rvRecipes.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.getRecipes()
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.events.collect {
-                    when (it) {
-                        is RecipesViewModel.RecipesEvents.Error -> {
-                            Log.e(
-                                "TAG",
-                                "onViewCreated Error: ${it.error.asString(requireContext())}"
-                            )
-                        }
-
-                        is RecipesViewModel.RecipesEvents.RecipesLoaded -> {
-                            adapter.submitList(it.recipes.results)
-                            Log.e("TAG", "onViewCreated: ${it.recipes}")
-                        }
-
-                        is RecipesViewModel.RecipesEvents.NavigateToDetailsFragment -> {
-
-                            findNavController().navigate(
-                                RecipesFragmentDirections.actionRecipesFragmentToDetailsFragment(it.foodId)
-                            )
-                        }
-                    }
-                }
-            }
-        }
+        observeEvents()
 
 
         menuHost.addMenuProvider(object : MenuProvider {
@@ -93,6 +65,32 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding, RecipesViewModel>(
         binding.fabRecipesDialog.setOnClickListener {
             findNavController().navigate(R.id.action_recipesFragment_to_recipeDialog)
         }
+    }
+
+    private fun observeEvents() {
+        launchWhen({
+            viewModel.events.collect {
+                when (it) {
+                    is RecipesViewModel.RecipesEvents.Error -> {
+                        Log.e(
+                            "TAG",
+                            "onViewCreated Error: ${it.error.asString(requireContext())}"
+                        )
+                    }
+
+                    is RecipesViewModel.RecipesEvents.RecipesLoaded -> {
+                        adapter.submitList(it.recipes.results)
+                        Log.e("TAG", "onViewCreated: ${it.recipes}")
+                    }
+
+                    is RecipesViewModel.RecipesEvents.NavigateToDetailsFragment -> {
+                        findNavController().navigate(
+                            RecipesFragmentDirections.actionRecipesFragmentToDetailsFragment(it.foodId)
+                        )
+                    }
+                }
+            }
+        },Lifecycle.State.RESUMED)
     }
 }
 
