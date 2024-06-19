@@ -1,5 +1,6 @@
 package com.sina.efood.domain.usecase
 
+import android.util.Log
 import com.sina.efood.core.errors.DataError
 import com.sina.efood.core.remote.dto.RecipeDto
 import com.sina.efood.data.AppResult

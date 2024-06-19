@@ -23,6 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class RecipesFragment : BaseFragment<FragmentRecipesBinding, RecipesViewModel>(
     FragmentRecipesBinding::inflate, RecipesViewModel::class
 ) {
+    private val TAG = "RecipesFragment"
     private lateinit var adapter: RecipesAdapter
     private lateinit var menuHost: MenuHost
 
@@ -49,7 +50,6 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding, RecipesViewModel>(
                 val searchView = searchAction.actionView as SearchView
                 searchView.isSubmitButtonEnabled = true
                 searchView.onQueryTextSubmit {
-                    Log.e("TAG", "onCreateMenu: $it")
                     viewModel.setSearchQuery(it)
 
                 }
@@ -72,15 +72,11 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding, RecipesViewModel>(
             viewModel.events.collect {
                 when (it) {
                     is RecipesViewModel.RecipesEvents.Error -> {
-                        Log.e(
-                            "TAG",
-                            "onViewCreated Error: ${it.error.asString(requireContext())}"
-                        )
+                        Log.e(TAG, "onViewCreated Error: ${it.error.asString(requireContext())}")
                     }
 
                     is RecipesViewModel.RecipesEvents.RecipesLoaded -> {
                         adapter.submitList(it.recipes.results)
-                        Log.e("TAG", "onViewCreated: ${it.recipes}")
                     }
 
                     is RecipesViewModel.RecipesEvents.NavigateToDetailsFragment -> {
@@ -90,7 +86,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding, RecipesViewModel>(
                     }
                 }
             }
-        },Lifecycle.State.RESUMED)
+        }, Lifecycle.State.RESUMED)
     }
 }
 

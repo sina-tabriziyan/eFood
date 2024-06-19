@@ -3,6 +3,7 @@ package com.sina.efood.data.remote
 import com.sina.efood.data.AppResult
 import com.sina.efood.core.errors.DataError
 import com.sina.efood.core.remote.FoodService
+import com.sina.efood.core.remote.dto.IngredientDto
 import com.sina.efood.core.remote.dto.RecipeDto
 import com.sina.efood.core.remote.dto.RecipesDto
 import com.sina.efood.data.openResponse
@@ -19,5 +20,9 @@ class RemoteDataSource @Inject constructor(
 
     suspend fun getRecipeById(recipeId: Int): AppResult<RecipeDto, DataError.Network> =
         foodService.getRecipeById(recipeId).openResponse()
+
+
+    suspend fun getIngredientById(recipeId: Int): AppResult<IngredientDto, DataError.Network> =
+        foodService.getIngredientById(recipeId).openResponse()
 
 }

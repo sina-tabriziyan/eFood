@@ -1,8 +1,11 @@
 package com.sina.efood.data.repository
 
+import android.provider.ContactsContract.Data
+import android.util.Log
 import com.sina.efood.core.errors.DataError
 import com.sina.efood.core.local.entities.RecipesEntity
 import com.sina.efood.core.remote.connectivity.NetworkListener
+import com.sina.efood.core.remote.dto.IngredientDto
 import com.sina.efood.core.remote.dto.RecipeDto
 import com.sina.efood.core.remote.dto.RecipesDto
 import com.sina.efood.data.AppResult
@@ -51,14 +54,29 @@ class RecipesRepository @Inject constructor(
         }.flowOn(dispatcher)
 
 
-    override suspend fun getRecipesById(recipeId: Int) : Flow<AppResult<RecipeDto, DataError>> = flow<AppResult<RecipeDto, DataError>> {
+    override suspend fun getRecipesById(recipeId: Int): Flow<AppResult<RecipeDto, DataError>> = flow<AppResult<RecipeDto, DataError>> {
         if (networkListener.checkNetworkAvailability().value) {
-            when(val networkResult = remoteDataSource.getRecipeById(recipeId)){
-                is AppResult.Error -> emit(AppResult.Error(networkResult.error))
+            when (val networkResult = remoteDataSource.getRecipeById(recipeId)) {
+                is AppResult.Error -> {
+                    emit(AppResult.Error(networkResult.error))
+                }
+
                 is AppResult.Success -> {
                     emit(AppResult.Success(networkResult.data))
+                    Log.e("TAG", "getRecipesById: ${networkResult.data}")
                 }
             }
+        }
+    }
+
+
+    override suspend fun getIngredientById(recipeId: Int): Flow<AppResult<IngredientDto, DataError>> = flow {
+        if (networkListener.checkNetworkAvailability().value) {
+            when (val result = remoteDataSource.getIngredientById(recipeId)) {
+                is AppResult.Error -> emit(AppResult.Error(result.error))
+                is AppResult.Success -> emit(AppResult.Success(result.data))
+            }
+
         }
     }
 }

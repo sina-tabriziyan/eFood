@@ -49,7 +49,6 @@ class RecipesViewModel @Inject constructor(
     }
 
     fun getRecipes() = viewModelScope.launch {
-        Log.e("TAG", "getRecipes: ${searchQuery.first()}")
         getRecipesUseCase.invoke(searchQuery.first()).collect {
             when (it) {
                 is AppResult.Error -> eventChannel.send(RecipesEvents.Error(it.error.asUiText()))
