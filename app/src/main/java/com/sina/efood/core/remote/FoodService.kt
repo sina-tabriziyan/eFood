@@ -1,5 +1,6 @@
 package com.sina.efood.core.remote
 
+import com.sina.efood.core.remote.dto.IngredientDto
 import com.sina.efood.core.remote.dto.RecipeDto
 import com.sina.efood.core.remote.dto.RecipesDto
 import retrofit2.Response
@@ -23,4 +24,9 @@ interface FoodService {
     suspend fun getRecipeById(
         @Path("id") id: Int,
     ): Response<RecipeDto>
+
+    @GET("recipes/{id}/ingredientWidget.json")
+    suspend fun getIngredientById(
+        @Path("id") id: Int
+    ):Response<IngredientDto>
 }
